@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You're Invited! 💍</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #ffe6e6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        h1 { color: #ff4d6d; font-size: 2.5rem; margin-bottom: 10px; }
+        p { color: #4a4a4a; font-size: 1.3rem; max-width: 400px; }
+        
+        /* Style for the GIF/Image container */
+        .gif-container img {
+            width: 200px;
+            height: auto;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .btn-container { position: relative; margin-top: 30px; height: 150px; width: 100%; max-width: 300px; }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        #yes-btn { background-color: #ff4d6d; color: white; position: absolute; left: 10px; }
+        #no-btn { background-color: #cccccc; color: #333333; position: absolute; right: 10px; }
+    </style>
+</head>
+<body>
+
+    <h1>You are invited! 🌸</h1>
+    <p>Will you attend our wedding celebration and be our guest?</p>
+    
+    <div class="gif-container">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW9sc3Rnd3BwYW81ZXN5Z3R5bnduZXN0Y3g0eXNoM3B5Nm9pZ3N4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/9G4Z7Zp34u0kL74t0M/giphy.gif" alt="Cute Bears">
+    </div>
+
+    <div class="btn-container">
+        <button id="yes-btn" onclick="celebrate()">YES! 🎉</button>
+        <button id="no-btn">No u_u</button>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('no-btn');
+
+        function moveButton() {
+            // Get screen boundaries safely
+            const padding = 20;
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - (padding * 2)) + padding;
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - (padding * 2)) + padding;
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+
+        // Makes it run away on desktop and mobile phones
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Prevents accidental clicking on phone
+            moveButton();
+        });
+
+        function celebrate() {
+            alert("Yay! 🥰 We knew you'd say yes! We will send you the official details soon!");
+        }
+    </script>
+</body>
+</html>
