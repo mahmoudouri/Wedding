@@ -3,84 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>You're Invited! 💍</title>
+    <title>Mahmoud & Mariem's Wedding! 💍</title>
     <style>
-        body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background-color: #ffe6e6;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        h1 { color: #ff4d6d; font-size: 2.5rem; margin-bottom: 10px; }
-        p { color: #4a4a4a; font-size: 1.3rem; max-width: 400px; }
-        
-        /* Style for the GIF/Image container */
-        .gif-container img {
-            width: 200px;
-            height: auto;
-            border-radius: 15px;
-            margin: 20px 0;
+        :root {
+            --primary: #ff4d6d;
+            --primary-hover: #ff758f;
+            --background: #ffe6e6;
+            --text: #4a4a4a;
         }
 
-        .btn-container { position: relative; margin-top: 30px; height: 150px; width: 100%; max-width: 300px; }
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+
+        /* Smooth Screen Transitions */
+        .screen {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            max-width: 450px;
+            width: 100%;
+            background: white;
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.15);
+        }
+
+        .screen.active {
+            display: block;
+            opacity: 1;
+        }
+
+        h1 { color: var(--primary); font-size: 2.2rem; margin-top: 0; }
+        p { font-size: 1.1rem; line-height: 1.5; }
+
+        .gif-box img {
+            width: 180px;
+            height: auto;
+            border-radius: 15px;
+            margin: 15px 0;
+        }
+
+        /* Buttons styling */
         button {
-            padding: 15px 30px;
+            padding: 15px 35px;
             font-size: 1.2rem;
             border: none;
-            border-radius: 25px;
+            border-radius: 50px;
             cursor: pointer;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
         }
-        #yes-btn { background-color: #ff4d6d; color: white; position: absolute; left: 10px; }
-        #no-btn { background-color: #cccccc; color: #333333; position: absolute; right: 10px; }
+        button:active { transform: scale(0.95); }
+
+        .primary-btn { background-color: var(--primary); color: white; }
+        .primary-btn:hover { background-color: var(--primary-hover); }
+
+        /* Runaway Container */
+        .btn-container { position: relative; margin-top: 30px; height: 120px; width: 100%; }
+        #yes-btn { background-color: var(--primary); color: white; position: absolute; left: 15%; }
+        #no-btn { background-color: #cccccc; color: #333; position: absolute; right: 15%; }
+
+        /* Countdown Grid */
+        .countdown { display: flex; justify-content: space-around; margin: 25px 0; }
+        .time-box { background: #fff0f3; padding: 10px; border-radius: 12px; min-width: 60px; border: 2px dashed var(--primary); }
+        .time-box span { display: block; font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+        .time-box label { font-size: 0.8rem; text-transform: uppercase; }
+
+        /* Floating Hearts */
+        .heart {
+            position: fixed;
+            color: var(--primary);
+            font-size: 1.5rem;
+            animation: floatUp 4s linear infinite;
+            bottom: -50px;
+            z-index: 999;
+            pointer-events: none;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
     </style>
 </head>
 <body>
 
-    <h1>You are invited! 🌸</h1>
-    <p>Will you attend our wedding celebration and be our guest?</p>
-    
-    <div class="gif-container">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW9sc3Rnd3BwYW81ZXN5Z3R5bnduZXN0Y3g0eXNoM3B5Nm9pZ3N4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/9G4Z7Zp34u0kL74t0M/giphy.gif" alt="Cute Bears">
+    <div id="screen1" class="screen active">
+        <h1>Mahmoud & Mariem ✉️</h1>
+        <div class="gif-box">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnZ2M3Jjc3g3NXd5Nm9wN3A5bDJ6NHBtcmZ3ZmN0ODV1cm8xaXh0NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/du3J3cXyzhj75IOgvA/giphy.gif" alt="Cute letter opening">
+        </div>
+        <p>A beautiful journey is about to begin, and we want you to be a part of it!</p>
+        <button class="primary-btn" onclick="goToScreen(2)">Open Invitation 🌸</button>
     </div>
 
-    <div class="btn-container">
-        <button id="yes-btn" onclick="celebrate()">YES! 🎉</button>
-        <button id="no-btn">No u_u</button>
+    <div id="screen2" class="screen">
+        <h1>Will You Attend? 🥰</h1>
+        <p>Are you coming to celebrate our wedding with us?</p>
+        <div class="gif-box">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW9sc3Rnd3BwYW81ZXN5Z3R5bnduZXN0Y3g0eXNoM3B5Nm9pZ3N4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/9G4Z7Zp34u0kL74t0M/giphy.gif" alt="Bubu Dudu Dance">
+        </div>
+        <div class="btn-container">
+            <button id="yes-btn" onclick="celebrate()">YES! 🎉</button>
+            <button id="no-btn">No u_u</button>
+        </div>
     </div>
+
+    <div id="screen3" class="screen">
+        <h1>Yay! See You There! 🎉❤️</h1>
+        <div class="gif-box">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHY5bXAzYjZxb28wbWw3MXJqdGd4ZmE5b3o1MXhhNHRtbTZicmU2MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/l4pTdcif75ufN5v6o/giphy.gif" alt="Happy bear hug">
+        </div>
+        
+        <p><strong>Save The Date!</strong><br>We can't wait to celebrate our big day with you!</p>
+
+        <div class="countdown">
+            <div class="time-box"><span id="days">00</span><label>Days</label></div>
+            <div class="time-box"><span id="hours">00</span><label>Hours</label></div>
+            <div class="time-box"><span id="mins">00</span><label>Mins</label></div>
+        </div>
+
+        <p>📅 <strong>Date:</strong> July 24, 2026</p>
+        
+        <button class="primary-btn" onclick="window.open('https://maps.app.goo.gl/9igtPQD5bLxJ7tJYA', '_blank')">📍 View Venue Location</button>
+    </div>
+
+    <audio id="bg-music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
 
     <script>
-        const noBtn = document.getElementById('no-btn');
+        function goToScreen(screenNum) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(`screen${screenNum}`).classList.add('active');
+            
+            if(screenNum === 2) {
+                const music = document.getElementById('bg-music');
+                music.volume = 0.3;
+                music.play().catch(e => console.log("Audio waiting for user click"));
+            }
+        }
 
+        // Runaway Button logic
+        const noBtn = document.getElementById('no-btn');
         function moveButton() {
-            // Get screen boundaries safely
-            const padding = 20;
+            const padding = 30;
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - (padding * 2)) + padding;
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - (padding * 2)) + padding;
-            
             noBtn.style.position = 'fixed';
             noBtn.style.left = `${x}px`;
             noBtn.style.top = `${y}px`;
         }
-
-        // Makes it run away on desktop and mobile phones
         noBtn.addEventListener('mouseover', moveButton);
-        noBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // Prevents accidental clicking on phone
-            moveButton();
-        });
+        noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); moveButton(); });
 
         function celebrate() {
-            alert("Yay! 🥰 We knew you'd say yes! We will send you the official details soon!");
+            goToScreen(3);
+            startHearts();
+            startCountdown();
+        }
+
+        // Floating Particles
+        function startHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerText = ['❤️','💖','🌸','✨','💕'][Math.floor(Math.random() * 5)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
+            }, 300);
+        }
+
+        // Countdown Timer Logic
+        function startCountdown() {
+            const weddingDate = new Date("2026-07-24T00:00:00").getTime();
+
+            setInterval(() => {
+                const now = new Date().getTime();
+                const distance = weddingDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+                // If date passes, set to 0
+                if (distance < 0) {
+                    document.getElementById("days").innerText = "00";
+                    document.getElementById("hours").innerText = "00";
+                    document.getElementById("mins").innerText = "00";
+                } else {
+                    document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+                    document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+                    document.getElementById("mins").innerText = mins < 10 ? "0" + mins : mins;
+                }
+            }, 1000);
         }
     </script>
 </body>
